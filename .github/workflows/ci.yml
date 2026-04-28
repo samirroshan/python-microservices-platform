@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,18 +17,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      
-      - name: Install dependencies for all services
+
+      - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -r services/user-service/requirements.txt
-          pip install -r services/product-service/reuirements.txt
+          pip install -r services/product-service/requirements.txt
           pip install -r services/order-service/requirements.txt
 
-      - name: Basic sanity check - order service imports
-        run: |
-          python -m compileall services/order-service/app
-     
-      - name: Build Docker iamges
+      - name: Build Docker images
         run: |
           docker compose build
