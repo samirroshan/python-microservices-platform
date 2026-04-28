@@ -1,0 +1,22 @@
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+USERS = {
+    1: {"id": 1, "name": "Sam", "email": "sam@example.com"},
+    2: {"id": 2, "name": "Alex", "email": "alex@example.com"},
+}
+@app.get("/")
+def root():
+    return {"message": "user-service is running"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    user = USERS.get(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
