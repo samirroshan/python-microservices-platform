@@ -2,6 +2,11 @@
 
 Python-based microservices platform composed of multiple independent HTTP services that communicate over a Docker Compose network.
 
+1. Client sends an order request.
+2. System looks up the user.
+3. System looks up the product.
+4. Order service puts it all together and processes the order.
+
 ## Services
 
 - **user-service**  
